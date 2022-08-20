@@ -12,13 +12,16 @@ const WEATHER_DATA = {
   DESCR_TMRW: '#bd2c > div.wDescription.clearfix > div.rSide > div',
 };
 
-const parse = async (cityName, type) => {
+const parse = async (cityName, ...types) => {
   const cityURL = encodeURI(cityName.toLowerCase());
   const data = await axios.get(`https://ua.sinoptik.ua/%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0-${cityURL}`)
     .then(html => {
         const $ = cheerio.load(html.data);
-        const text = $(WEATHER_DATA[type]).text();
-        return text;
+        const res = new Array();
+        for (const type of types) {
+          res.push($(WEATHER_DATA[type]).text());
+        }
+        return res;
     });
   return data;
 };
