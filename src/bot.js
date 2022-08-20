@@ -3,6 +3,7 @@
 const { Telegraf } = require('telegraf');
 const { parse } = require('./parser.js');
 const { getDate, getTomorrowsDate } = require('./date.js');
+const fs = require('fs');
 require('dotenv').config();
 
 const bot = new Telegraf (process.env.BOT_TOKEN);
@@ -62,6 +63,12 @@ bot.command('woman', ctx => {
 bot.command('trevoga', (ctx) => {
   const chance = Math.round(Math.random() * GIFS.length);
   ctx.replyWithAnimation(GIFS[chance]);
+});
+
+bot.on("animation", async (ctx) => {
+  const username = ctx.update.message.from.username;
+  const idGif = ctx.update.message.animation.file_id;
+  if (username === 'kreslavskiy') await fs.promises.appendFile('gifs.txt', idGif + '\n');
 });
 
 bot.launch();
