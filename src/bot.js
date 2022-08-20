@@ -51,26 +51,25 @@ bot.command('today', async (ctx) => {
       `Зараз ${now}.\n` +
       `Мінімальна температура – ${min}С.\n` +
       `Максимальна температура – ${max}С.`;
-    ctx.replyWithPhoto({ source: 'temperature/dima.jpg' }, { caption: text });
+    ctx.reply(text, { reply_to_message_id: ctx.message.message_id });
   } catch (err) {
     console.log(err.message);
-    ctx.replyWithMarkdown('Не можу знайти це місто');
+    ctx.reply('Не можу знайти це місто', { reply_to_message_id: ctx.message.message_id });
   }
 });
 
 bot.command('tmrw', async (ctx) => {
   const input = ctx.message.text.split(' ').slice(1).join(' ');
   try {
-    const max = await parse(input, 'MAX_TEMP_TMRW');
-    const min = await parse(input, 'MIN_TEMP_TMRW');
+    const [ max, min ] = await parse(input, 'MAX_TEMP_TMRW', 'MIN_TEMP_TMRW');
     const text =
       `Завра ${getTomorrowsDate()}\n` +
       `Мінімальна температура – ${min}С.\n` +
       `Максимальна температура – ${max}С.`;
-    ctx.replyWithPhoto({ source: 'temperature/dima.jpeg' }, { caption: text });
+    ctx.reply(text, { reply_to_message_id: ctx.message.message_id });
   } catch (err) {
-    console.log(err);
-    ctx.reply('Не можу знайти це місто');
+    console.log(err.message);
+    ctx.reply('Не можу знайти це місто', { reply_to_message_id: ctx.message.message_id });
   }
 });
 
@@ -83,12 +82,5 @@ bot.command('trevoga', (ctx) => {
   const chance = Math.round(Math.random() * GIFS.length);
   ctx.replyWithAnimation(GIFS[chance]);
 });
-
-// bot.on('animation', async (ctx) => {
-//   const username = ctx.update.message.from.username;
-//   const idGif = ctx.update.message.animation.file_id;
-//   if (username === 'MrPaschenko' || username === 'Nikita_Sutulov')
-//     await fs.promises.appendFile('gifs.txt', '\'' + idGif + '\',\n');
-// });
 
 bot.launch();
