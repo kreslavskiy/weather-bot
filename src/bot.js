@@ -21,7 +21,9 @@ const GIFS = [
   'CgACAgIAAxkBAAIGFGMBCl_l_gABxDu-QzVCFvBAZPkyFQACTR0AAh3AgUtlJeHobKlYkikE',
   'CgACAgIAAxkBAAIGFWMBCmhq-01lYLgs6u2nrj6JMQQaAALUGQACKw-5SltRkj8g3z-SKQQ',
   'CgACAgIAAxkBAAIGFmMBCpo4DdbsKzzwmNzob43znrAjAAI2GQACvMG4SbPl67lz7Y91KQQ',
-  'CgACAgQAAx0CXbX_GgABAWY0YwELSioHIDB3UymqqO5_TnpkTcMAAhIDAAImbQVToWvDkVf-LOQpBA',
+  'CgACAgQAAxkBAAIGNWMBDLh0ldxYVNTKXRizdD0eDVEZAAJ1AwACYCAFU94e2ssI_DwdKQQ',
+  'CgACAgIAAxkBAAIGNmMBDLjq0EXFbNhyQxKirSRTUueWAAKxGQAC34axSa80mdZ6D9STKQQ',
+  'CgACAgQAAxkBAAIGN2MBDLr-EjkNYyNH-wZeFDqzrii3AAKjAgACRZT0UWWh8_f0jFRtKQQ',
 ];
 
 bot.start((ctx) => ctx.reply('Welcome'));
@@ -82,11 +84,11 @@ bot.command('trevoga', (ctx) => {
   ctx.replyWithAnimation(GIFS[chance]);
 });
 
-bot.on('animation', async (ctx) => {
-  const username = ctx.update.message.from.username;
-  const idGif = ctx.update.message.animation.file_id;
-  if (username === 'MrPaschenko' || username === 'Nikita_Sutulov')
-    await fs.promises.appendFile('gifs.txt', '\'' + idGif + '\'\n');
-});
+// bot.on('animation', async (ctx) => {
+//   const username = ctx.update.message.from.username;
+//   const idGif = ctx.update.message.animation.file_id;
+//   if (username === 'MrPaschenko' || username === 'Nikita_Sutulov')
+//     await fs.promises.appendFile('gifs.txt', '\'' + idGif + '\',\n');
+// });
 
 bot.launch();
