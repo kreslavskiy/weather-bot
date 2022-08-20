@@ -4,6 +4,7 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 
 const WEATHER_DATA = {
+  CITY_NAME: '#header > div.cityName.cityNameShort > h1 > strong',
   MIN_TEMP: '#bd1 > div.temperature > div.min > span',
   MAX_TEMP: '#bd1 > div.temperature > div.max > span',
   RIGHT_NOW: '#bd1c > div.wMain.clearfix > div.lSide > div.imgBlock > p.today-temp',

@@ -37,9 +37,10 @@ bot.help((ctx) => {
 });
 
 bot.command('today', async (ctx) => {
-  const input = ctx.message.text.split(' ').slice(1).join(' ');
-  console.log(ctx.message.from.username + ': ' + input);
   try {
+    const input = ctx.message.text.split(' ').slice(1).join(' ');
+    console.log(ctx.message.from.username + ': ' + input);
+    const cityName = input[0].toUpperCase() + input.slice(1);
     const [max, min, now] = await parse(
       input,
       'MAX_TEMP',
@@ -47,10 +48,10 @@ bot.command('today', async (ctx) => {
       'RIGHT_NOW'
     );
     const text =
-      `Сьогодні ${getDate()}\n` +
-      `Зараз ${now}.\n` +
-      `Мінімальна температура – ${min}С.\n` +
-      `Максимальна температура – ${max}С.`;
+      `Погода на сьогодні, ${getDate()}, у місті ${cityName}:\n` +
+      `Зараз — ${now}.\n` +
+      `Мінімальна температура — ${min}С.\n` +
+      `Максимальна температура — ${max}С.`;
     ctx.reply(text, { reply_to_message_id: ctx.message.message_id });
   } catch (err) {
     console.log(err.message);
@@ -59,13 +60,12 @@ bot.command('today', async (ctx) => {
 });
 
 bot.command('tmrw', async (ctx) => {
-  const input = ctx.message.text.split(' ').slice(1).join(' ');
   try {
-    const [ max, min ] = await parse(input, 'MAX_TEMP_TMRW', 'MIN_TEMP_TMRW');
+    const input = ctx.message.text.split(' ').slice(1).join(' ');
+    console.log(ctx.message.from.username + ': ' + input);
+    const [ max, min, cityName ] = await parse(input, 'MAX_TEMP_TMRW', 'MIN_TEMP_TMRW', 'CITY_NAME');
     const text =
-      `Завра ${getTomorrowsDate()}\n` +
-      `Мінімальна температура – ${min}С.\n` +
-      `Максимальна температура – ${max}С.`;
+      `Завтра, ${getTomorrowsDate()}, ${cityName} буде від ${min}С до ${max}С\n`;
     ctx.reply(text, { reply_to_message_id: ctx.message.message_id });
   } catch (err) {
     console.log(err.message);
