@@ -74,7 +74,7 @@ bot.command('tmrw', async (ctx) => {
 });
 
 bot.command('woman', (ctx) => {
-  const chance = Math.round(Math.random() * 19) + 1;
+  const chance = Math.round(Math.random() * 22) + 1;
   ctx.replyWithPhoto({ source: `women/${chance}.jpeg` });
 });
 
