@@ -7,13 +7,13 @@ require('dotenv').config();
 
 const bot = new Telegraf (process.env.BOT_TOKEN);
 
-const GIFS = {
-  1: 'CgACAgIAAx0CXbX_GgACs2hitNBd66VvXTrGsM99HuygA64UYAACjhgAAuX10Ukkgfto-KrO0ykE',
-  2: 'CgACAgIAAx0CXbX_GgACs2pitNBfvZKqCSVkA2q2v5ur5Ash0wACsRkAAt-GsUmvNJnWeg_UkykE',
-  3: 'CgACAgIAAx0CXbX_GgACs3xitNDoG5fABjaThgecGHF-aodhqgACExkAAiVWuUosqS5k4xKw2CkE',
-  4: 'CgACAgIAAx0CXbX_GgACtAZitNY-tTlC-EL_PtDaiGfxrk6gewACgBoAAn79GEqH1Y044I7BCykE',
-  5: 'CgACAgIAAx0CXbX_GgACvERiuH9B1_pNURC8UocE7TLDPtTdQgACtRcAAuO8aEh3-zF9g_7yRykE',
-};
+const GIFS = [
+  'CgACAgIAAx0CXbX_GgACs2hitNBd66VvXTrGsM99HuygA64UYAACjhgAAuX10Ukkgfto-KrO0ykE',
+  'CgACAgIAAx0CXbX_GgACs2pitNBfvZKqCSVkA2q2v5ur5Ash0wACsRkAAt-GsUmvNJnWeg_UkykE',
+  'CgACAgIAAx0CXbX_GgACs3xitNDoG5fABjaThgecGHF-aodhqgACExkAAiVWuUosqS5k4xKw2CkE',
+  'CgACAgIAAx0CXbX_GgACtAZitNY-tTlC-EL_PtDaiGfxrk6gewACgBoAAn79GEqH1Y044I7BCykE',
+  'CgACAgIAAx0CXbX_GgACvERiuH9B1_pNURC8UocE7TLDPtTdQgACtRcAAuO8aEh3-zF9g_7yRykE',
+];
 
 bot.start((ctx) => ctx.reply('Welcome'));
 
@@ -27,9 +27,7 @@ bot.command('today', async ctx => {
   const input = ctx.message.text.split(' ').slice(1).join(' ');
   console.log(ctx.message.from.username + ': ' + input);
   try {
-    const max = await parse(input, 'MAX_TEMP');
-    const min = await parse(input, 'MIN_TEMP');
-    const now  = await parse(input, 'RIGHT_NOW');
+    const [ max, min, now ] = await parse(input, 'MAX_TEMP', 'MIN_TEMP', 'RIGHT_NOW');
     const text = `Сьогодні ${getDate()}\n` +
                  `Зараз ${now}.\n` +
                  `Мінімальна температура – ${min}С.\n` +
@@ -62,7 +60,7 @@ bot.command('woman', ctx => {
 });
 
 bot.command('trevoga', (ctx) => {
-  const chance = Math.round(Math.random() * 4 + 1);
+  const chance = Math.round(Math.random() * GIFS.length);
   ctx.replyWithAnimation(GIFS[chance]);
 });
 
