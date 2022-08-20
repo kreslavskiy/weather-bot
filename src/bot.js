@@ -40,15 +40,15 @@ bot.command('today', async (ctx) => {
   try {
     const input = ctx.message.text.split(' ').slice(1).join(' ');
     console.log(ctx.message.from.username + ': ' + input);
-    const cityName = input[0].toUpperCase() + input.slice(1);
-    const [max, min, now] = await parse(
+    const [max, min, now, cityName] = await parse(
       input,
       'MAX_TEMP',
       'MIN_TEMP',
-      'RIGHT_NOW'
+      'RIGHT_NOW',
+      'CITY_NAME'
     );
     const text =
-      `Погода на сьогодні, ${getDate()}, у місті ${cityName}:\n` +
+      `Погода на сьогодні, ${getDate()}, ${cityName}:\n` +
       `Зараз — ${now}.\n` +
       `Мінімальна температура — ${min}С.\n` +
       `Максимальна температура — ${max}С.`;
