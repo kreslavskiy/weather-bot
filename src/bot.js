@@ -83,4 +83,8 @@ bot.command('trevoga', (ctx) => {
   ctx.replyWithAnimation(GIFS[chance]);
 });
 
+bot.command('nark', ctx => {
+  ctx.reply('@demasmxrxz @poor_boy наркоши тут про вас');
+})
+
 bot.launch();
