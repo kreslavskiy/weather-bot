@@ -23,7 +23,9 @@ const GIFS = [
   'CgACAgIAAxkBAAIGFmMBCpo4DdbsKzzwmNzob43znrAjAAI2GQACvMG4SbPl67lz7Y91KQQ',
   'CgACAgQAAxkBAAIGNWMBDLh0ldxYVNTKXRizdD0eDVEZAAJ1AwACYCAFU94e2ssI_DwdKQQ',
   'CgACAgIAAxkBAAIGNmMBDLjq0EXFbNhyQxKirSRTUueWAAKxGQAC34axSa80mdZ6D9STKQQ',
-  'CgACAgQAAxkBAAIGN2MBDLr-EjkNYyNH-wZeFDqzrii3AAKjAgACRZT0UWWh8_f0jFRtKQQ',
+  'CgACAgIAAxkBAAIGcmMGRc-9kCsWq70y79SY39y9ZTz0AAJFGgACEwEISNiuT3Ky1MMyKQQ',
+  'CgACAgIAAxkBAAIGdGMGRc_iiInpcfvW-oGOr4Gs8qm4AAIWGAAC9WVxSDP-HH61lXxlKQQ',
+  'CgACAgIAAxkBAAIGc2MGRc9BS4aRMpshFcowC_9yy91XAAIkHAACH7MISPe63tKw-xdIKQQ',
 ];
 
 bot.start((ctx) => ctx.reply('Welcome'));
@@ -85,6 +87,6 @@ bot.command('trevoga', (ctx) => {
 
 bot.command('nark', ctx => {
   ctx.reply('@demasmxrxz @poor_boy наркоши тут про вас');
-})
+});
 
 bot.launch();
