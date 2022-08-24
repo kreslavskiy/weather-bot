@@ -3,7 +3,6 @@
 const { Telegraf } = require('telegraf');
 const { parse } = require('./parser.js');
 const { getDate, getTomorrowsDate } = require('./date.js');
-const fs = require('fs');
 require('dotenv').config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -57,7 +56,9 @@ bot.command('today', async (ctx) => {
     ctx.reply(text, { reply_to_message_id: ctx.message.message_id });
   } catch (err) {
     console.log(err.message);
-    ctx.reply('Не можу знайти це місто', { reply_to_message_id: ctx.message.message_id });
+    ctx.reply('Не можу знайти це місто', {
+      reply_to_message_id: ctx.message.message_id,
+    });
   }
 });
 
@@ -65,13 +66,19 @@ bot.command('tmrw', async (ctx) => {
   try {
     const input = ctx.message.text.split(' ').slice(1).join(' ');
     console.log(ctx.message.from.username + ': ' + input);
-    const [ max, min, cityName ] = await parse(input, 'MAX_TEMP_TMRW', 'MIN_TEMP_TMRW', 'CITY_NAME');
-    const text =
-      `Завтра, ${getTomorrowsDate()}, ${cityName} буде від ${min}С до ${max}С\n`;
+    const [max, min, cityName] = await parse(
+      input,
+      'MAX_TEMP_TMRW',
+      'MIN_TEMP_TMRW',
+      'CITY_NAME'
+    );
+    const text = `Завтра, ${getTomorrowsDate()}, ${cityName} буде від ${min}С до ${max}С\n`;
     ctx.reply(text, { reply_to_message_id: ctx.message.message_id });
   } catch (err) {
     console.log(err.message);
-    ctx.reply('Не можу знайти це місто', { reply_to_message_id: ctx.message.message_id });
+    ctx.reply('Не можу знайти це місто', {
+      reply_to_message_id: ctx.message.message_id,
+    });
   }
 });
 
@@ -83,10 +90,6 @@ bot.command('woman', (ctx) => {
 bot.command('trevoga', (ctx) => {
   const chance = Math.round(Math.random() * GIFS.length);
   ctx.replyWithAnimation(GIFS[chance]);
-});
-
-bot.command('nark', ctx => {
-  ctx.reply('@demasmxrxz @poor_boy наркоши тут про вас');
 });
 
 bot.launch();
