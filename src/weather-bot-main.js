@@ -88,7 +88,7 @@ bot.command('woman', (ctx) => {
 });
 
 bot.command('trevoga', (ctx) => {
-  const chance = Math.round(Math.random() * GIFS.length);
+  const chance = Math.round(Math.random() * (GIFS.length - 1));
   ctx.replyWithAnimation(GIFS[chance]);
 });
 
