@@ -9,7 +9,7 @@ const WEATHER_DATA = {
   MAX_TEMP: '#bd1 > div.temperature > div.max > span',
   RIGHT_NOW: '#bd1c > div.wMain.clearfix > div.lSide > div.imgBlock > p.today-temp',
   MIN_TEMP_TMRW: '#bd2 > div.temperature > div.min > span',
-  MAX_TEMP_TMRW: '#bd2 > div.temperature > div.max > span',
+  MAX_TEMP_TMRW: '#bd2 > div.temperature > div.max > span', 
   DESCR_TMRW: '#bd2c > div.wDescription.clearfix > div.rSide > div',
 };
 
